@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>계산기</title>
+</head>
+<body>
+
+	<input type = number id = num1> <!-- type이 number라도 value값은 String으로 나온다 -->
+	<input type = number id = num2>
+	
+
+	<button onclick = plus_value()>더하기</button>
+	<button onclick = minus_value()>빼기</button>
+	<button onclick = multiple_value()>곱하기</button>
+	<button onclick = divide_value()>나누기</button>
+	<button onclick = clear_write()>초기화</button>
+	
+	
+	<div id=values></div>
+	
+	<script>
+	
+	
+	function plus_value(){
+		var num1 = Number(document.getElementById('num1').value);
+		var num2 = Number(document.getElementById('num2').value);
+		var plus_values = num1 + num2;
+		/*	console.log(document.getElementById('num1').value);
+		console.log(document.getElementById('num2').value);
+		console.log(typeof(num1));
+		console.log(typeof(Number(plus_values)));*/
+		console.log(plus_values);
+		var values = document.getElementById('values');      
+		values.innerHTML += num1 +' + '+ num2 + ' = ' +plus_values + '<br>';
+	}
+	
+	function minus_value(){
+		var num1 = Number(document.getElementById('num1').value);
+		var num2 = Number(document.getElementById('num2').value);
+		var minus_values = num1 - num2;
+		var values = document.getElementById('values');
+		console.log(minus_values);
+		values.innerHTML += num1 +' - '+ num2 + ' = ' +minus_values + '<br>';
+	}
+	
+	function multiple_value(){
+		var num1 = Number(document.getElementById('num1').value);
+		var num2 = Number(document.getElementById('num2').value);
+		var multiple_values = num1 * num2;
+		var values = document.getElementById('values');
+		console.log(multiple_values);
+		values.innerHTML += num1 +' * '+ num2 + ' = ' + multiple_values + '<br>';
+	}
+	
+	function divide_value(){
+		var num1 = Number(document.getElementById('num1').value);
+		var num2 = Number(document.getElementById('num2').value);
+		var divide_values = num1 / num2;
+		var values = document.getElementById('values');
+		console.log(divide_values);
+		values.innerHTML += num1 +' / '+ num2 + ' = ' + divide_values + '<br>';
+	}
+	
+	function clear_write(){
+		//console.log('??');
+		document.getElementById('values').innerHTML = '';
+		//console.log('??');
+	}
+	
+	 
+	</script>
+</body>
+</html>

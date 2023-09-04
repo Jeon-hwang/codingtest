@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>연락처 프로그램</title>
+</head>
+<body>
+	<!-- 인덱스 삭제시 배열 인덱스가 당겨짐 array2 에 힌트있음 -->
+	<h1>연락처 프로그램</h1>
+	이름 : <input type ="text" id='cname'><br>
+	연락처 : <input type ="text" id='phone'><br>
+	이메일 : <input type ="text" id='email'><br>
+	
+	<button onclick = 'insert()'>입력</button> <!-- // 클릭시 insert()실행-->
+	<button onclick = 'selectAll()'>전체검색</button>
+	인덱스 : <input type="number" id ="index">
+	<button onclick = 'deleteByIndex()'>삭제</button>
+	<hr>
+	<div id = "output">ㅁㅁ</div>
+	
+	<script>
+	var contact;//입력한 이름,연락처, 이메일 값을 객체로 저장
+	var contactList = new Array(); //연락처 객체를 배열로 저장
+	var cname = document.getElementById('cname');
+	var phone = document.getElementById('phone');
+	var email = document.getElementById('email');
+	// 클릭시 contactList에 contact가 들어가야한다.
+	function insert(){ 
+		
+		contact = {
+			이름 : cname.value, // 
+			연락처 : phone.value, 
+			이메일 : email.value
+		};
+		
+		contactList.push(contact);
+		
+		output.innerHTML = '성공적으로 등록 되었습니다!';
+	}
+	
+	function selectAll(){
+		output.innerHTML = '';
+	for(var i = 0 ; i<contactList.length;i++){
+		output.innerHTML += i+'번 인덱스 : ' +'<br>';
+		for(x in contactList[i])
+		output.innerHTML += x+':'+ contact[x] + '<br>';
+	}
+	/*
+	for(x in contactList){
+		output.innerHTML += x+ '번 ' + '이름 : ' + contactList[x].이름 + '<br>';
+	}*/
+	
+	/*
+		output.innerHTML='';
+		for(x in contactList){
+			output.innerHTML += x+ '번'
+			+ '이름 : ' + contactList[x].이름
+		}
+	
+	*/
+	}
+	function deleteByIndex(){
+		var get_index = document.getElementById('index').value;
+		contactList.splice(get_index, get_index); // 틀림 두번째 원소는 몇만큼 지울건지
+		// contactList.splice(get_index,1); 이게 정답
+	}
+	</script>
+	
+</body>
+</html>

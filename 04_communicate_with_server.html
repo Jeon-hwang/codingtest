@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>글자 추천</title>
+</head>
+<body>
+	<h3>아래에 글을 입력해주세요.</h3>
+	<p>
+	첫 글자 : <input type="text" id="txt" onkeyup="showHint(this.value)">
+	</p>
+	<p>
+	추천 : <span id="txtHint"></span>
+	</p>
+	<script type="text/javascript">
+	function showHint(str){ // 누르는 순간 작동한당
+		//console.log(str);
+		const xhttp = new XMLHttpRequest(); 
+		xhttp.onreadystatechange = function(){
+			if(this.readyState ==4 && this.status ==200){
+				//console.log(this);
+				//console.log(this.responseText);
+				document.getElementById("txtHint").innerHTML = this.responseText;
+		};
+		
+	}
+	var url = "?method=post&flag="+str.charAt(0);
+	
+		xhttp.open("POST","04_get_hint.jsp",true);
+		xhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		xhttp.send(url);
+	}
+	// 자동완성 기능 (a면 애플 b면 바나나 c면 코코넛 추천에 출력)
+	</script>
+</body>
+</html>

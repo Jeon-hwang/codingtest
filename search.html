@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<title>검색 추천</title>
+</head>
+<body>
+	<h2>검색 키워드 입력하세요</h2>
+
+	<p>
+		검색 : <input type="text" id="search">
+	</p>
+	<p>추천 검색어 목록</p>
+	<div id="list"></div>
+
+	<script type="text/javascript">
+	/*
+	$(document).ready(function(){
+		$('#search').keyup(function(){
+			//console.log($('input').val());
+			
+			const xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function(){
+				if(this.readyState ==4 && this.status ==200){
+					//console.log(this);
+					//console.log(this.responseText);
+					document.getElementById("list").innerHTML = this.responseText;
+			};
+			xhttp.open("GET","../search.do"+$('#search').val(),true);
+			xhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			xhttp.send();
+			}
+			$.getJSON('../search.do',
+			function(jsonData){
+				console.log(jsonData);
+				var link = 'https://search.naver.com/search.naver?where=nexearch&sm=top_sug.pre&fbm=0&acr=3&acq=23&qdt=0&ie=utf8&query=';
+				var result = '';
+				
+				for(var x in jsonData.list){
+					result += '<a href='+link+jsonData.list[x]+'>'+jsonData.list[x]+'</a><br>';
+				}
+				$('#list').append(result);
+			
+			
+			);//end getJSON
+			
+			}); //end #search.keyup()
+	});//end document
+		*/
+	$(document).ready(function(){
+		$('#search').keyup(function(){
+					if($('#search').val()==''){
+						$('#list').html("");
+						console.log("빈공간");
+						return;
+					}
+					//console.log($('#search').val());
+					//console.log(this.responseText);
+					//document.getElementById("list").innerHTML = this.responseText;
+				$.getJSON("../search.do?title="+$('#search').val(),
+					function(jsonData){
+						//console.log(jsonData);
+						var link = 'https://search.naver.com/search.naver?where=nexearch&sm=top_sug.pre&fbm=0&acr=3&acq=23&qdt=0&ie=utf8&query=';
+						var result = '';
+						
+						for(var x in jsonData){
+							
+							
+							result += '<a href='+link+jsonData[x]+'>'+jsonData[x]+'</a><br>';
+						}
+						$('#list').html(result);
+					
+					
+			});//end getJSON
+					
+		
+			
+			
+		});// end search.keyup();	
+	}); // end document
+	
+	</script>
+</body>
+</html>

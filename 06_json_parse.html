@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JQuery Ajax JSON</title>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+<body>
+	<button>출력 버튼</button>
+	<p id="output">
+	</p>
+	
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('button').click(function(){
+			
+		$.ajax({
+			type : "get",
+			url : "06_json_test.txt",
+			success : function(result){
+				console.log(result);
+				// 즉석 퀴즈. 전송받은 json 데이터를 id="output"인 태그에 보여주기
+				// 예시)
+				// 이름 :mok
+				// 나이 : 20
+				// 펫 : dog, 이름 : choco
+				// 펫 : cat, 이름 : navi
+				//var myJSON = JSON.stringify(result); // 이건 안해도 된다 이미 문자열로 이루어진 파일에다 한번더 문자열로 바꾸는 작업을 쳐버리는것
+			//	console.log(myJSON);
+				
+				var obj = JSON.parse(result); // 자바스크립트의 객체(Object)로 변환
+				//console.log(typeof obj.name);
+				//console.log(typeof obj.age);
+				//console.log(obj.pets);
+				
+				//console.log(obj);
+				document.getElementById("output").innerHTML += "이름 : "+ obj.name +"<br>";
+				document.getElementById("output").innerHTML += "나이 : "+ obj.age +"<br>";
+				document.getElementById("output").innerHTML += "펫 : "+ obj.pets[0].animal 
+																+" 이름 : "+obj.pets[0].name+"<br>";
+				document.getElementById("output").innerHTML += "펫 : "+ obj.pets[1].animal 
+				+" 이름 : "+obj.pets[1].name+"<hr>"
+				
+				// Jquery 이용해서 출력하기
+				
+				$("#output").append("이름 : "+obj.name+"<br>");
+				$("#output").append("나이 : "+obj.age+"<br>");
+				for(var i in obj.pets){
+				//for(var i : obj.pets){
+					$("#output").append("동물 : "+obj.pets[i].animal+" 이름 : "+obj.pets[i].name+"<br>");
+				}
+				//$("#output").append("동물 : "+obj.pets[0].animal+" 이름 : "+obj.pets[0].name+"<br>");
+				//$("#output").append("동물 : "+obj.pets[1].animal+" 이름 : "+obj.pets[1].name+"<br>");
+								
+				/* 강사님 코드
+				var obj = JSON.parse(result);
+				var str = "";
+				str += "이름 : " + obj.name + "<br>";
+				str += "나이 : " + obj.name + "<br>";
+				for(var x in obj.pets){
+					str += "펫 : " + obj.pets[x] +
+					", 이름 : "+obj.pets[x]+"<br>";
+				}
+				
+				$('#output').html(str); 
+				** 코드가 길어질 수록 집중이 풀릴확률이 높다
+				}
+				
+				*/
+				
+				}// end success(function())
+				
+				
+			});//end $.ajax
+		}); //end button.click()
+	}); //end document
+	</script>
+</body>
+</html>
